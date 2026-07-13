@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naruto Video Clock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- VIDEO BACKGROUND -->
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- CLOCK -->
+  <div class="clock">
+    <span id="time">00:00:00</span>
+    <span id="ampm">AM</span>
+  </div>
+
+<script>
+function updateClock() {
+  const now = new Date();
+
+  let h = now.getHours();
+  let m = String(now.getMinutes()).padStart(2, '0');
+  let s = String(now.getSeconds()).padStart(2, '0');
+  let ampm = h >= 12 ? "PM" : "AM";
+
+  h = h % 12;
+  h = h ? h : 12;
+  h = String(h).padStart(2, '0');
+
+  document.getElementById("time").innerHTML =
+    `${h}<span class="dots">:</span>${m}<span class="dots">:</span>${s}`;
+
+  document.getElementById("ampm").textContent = ampm;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+
+</body>
+</html>
